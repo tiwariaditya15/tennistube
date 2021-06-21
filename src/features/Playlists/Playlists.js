@@ -10,7 +10,11 @@ export function Playlists() {
         }}
       >
         <span>Save to</span>
-        <span>
+        <span
+          style={{
+            cursor: "pointer",
+          }}
+        >
           <MdiClose />
         </span>
       </section>
