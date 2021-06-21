@@ -1,6 +1,8 @@
+import { useInteractions } from "../../context/InteractionsProvider";
 import { MdiClose } from "../../molecules/icones";
 import styles from "./playlists.module.css";
 export function Playlists() {
+  const { setModal } = useInteractions();
   return (
     <section className={""}>
       <section
@@ -14,6 +16,7 @@ export function Playlists() {
           style={{
             cursor: "pointer",
           }}
+          onClick={() => setModal(false)}
         >
           <MdiClose />
         </span>

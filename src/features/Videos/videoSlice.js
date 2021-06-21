@@ -5,15 +5,16 @@ import {
 } from "@reduxjs/toolkit";
 import * as api from "../../api/videos";
 
-export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
+export const fetchVideos = createAsyncThunk("videos/fetchVideos", async (, { }) => {
   try {
     const response = await api.fetchVideos();
     return response.data.videos;
   } catch (error) {
-    console.log({ error });
+    let err = error
     if (!error.status) {
-      console.log("Netwrok Error");
+     throw err;
     }
+    return 
   }
 });
 
