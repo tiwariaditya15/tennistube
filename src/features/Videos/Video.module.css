@@ -1,0 +1,20 @@
+.cardbody__navlink {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.cardbody__date {
+  color: var(--colors-secondary);
+  cursor: pointer;
+}
+.cardbody__date:hover {
+  color: white;
+}
+.cardbody__menu {
+  color: var(--colors-secondary);
+  cursor: pointer;
+}
+
+.cardbody__menu:hover {
+  color: white
+}

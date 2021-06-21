@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useLayoutEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Home } from "./app/Home";
+import { Watch } from "./app/Watch";
+import { TabNavigation } from "./molecules/TabNavigation";
+import { Sidenav } from "./molecules/Sidenav";
+import { useInteractions } from "./context/InteractionsProvider";
+import { Modal } from "./molecules/Modal";
+import { Playlists } from "./features/Playlists";
 
-function App() {
+export default function App() {
+  const [theme, setTheme] = useState("dark");
+  const { modal } = useInteractions();
+
+  const toggleTheme = () => {
+    theme === "dark" ? setTheme("light") : setTheme("dark");
+  };
+
+  useLayoutEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
+
+  console.log(useSelector((store) => store));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <section className="">
+        <Sidenav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/watch/:videoId" element={<Watch />} />
+        </Routes>
+        <TabNavigation />
+      </section>
+      {modal && (
+        <Modal>
+          <Playlists />
+        </Modal>
+      )}
+    </>
   );
 }
-
-export default App;
