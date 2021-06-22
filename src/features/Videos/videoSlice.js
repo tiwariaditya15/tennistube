@@ -5,16 +5,15 @@ import {
 } from "@reduxjs/toolkit";
 import * as api from "../../api/videos";
 
-export const fetchVideos = createAsyncThunk("videos/fetchVideos", async (, { }) => {
+export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   try {
     const response = await api.fetchVideos();
     return response.data.videos;
   } catch (error) {
-    let err = error
+    let err = error;
     if (!error.status) {
-     throw err;
+      throw err;
     }
-    return 
   }
 });
 
@@ -31,7 +30,8 @@ const videoSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchVideos.fulfilled, videosAdapter.upsertMany);
     builder.addCase(fetchVideos.rejected, (state, action) => {
-      console.log(action.payload);
+      console.log(">>", action.error.message);
+      state.error = action.error.message;
     });
   },
 });
