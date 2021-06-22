@@ -1,8 +1,15 @@
+import { useDispatch } from "react-redux";
 import { useInteractions } from "../../context/InteractionsProvider";
+import { fetchPlaylists } from "./playlistsSlice";
 import { MdiClose } from "../../molecules/icones";
 import styles from "./playlists.module.css";
+import { useEffect } from "react";
 export function Playlists() {
   const { setModal } = useInteractions();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPlaylists());
+  }, [dispatch]);
   return (
     <section className={""}>
       <section
