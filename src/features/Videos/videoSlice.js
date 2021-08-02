@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
-import * as api from "../../api/videos";
+import * as api from "../../app/api/videos";
 
 export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   try {
@@ -30,7 +30,7 @@ const videoSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchVideos.fulfilled, videosAdapter.upsertMany);
     builder.addCase(fetchVideos.rejected, (state, action) => {
-      console.log(">>", action.error.message);
+      // console.log(">>", action.error.message);
       state.error = action.error.message;
     });
   },

@@ -1,40 +1,46 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useState, useLayoutEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Home } from "./app/Home";
-import { Watch } from "./app/Watch";
-import { TabNavigation } from "./molecules/TabNavigation";
-import { Sidenav } from "./molecules/Sidenav";
-import { useInteractions } from "./context/InteractionsProvider";
-import { Modal } from "./molecules/Modal";
-import { Playlists } from "./features/Playlists";
+import { useDispatch, useSelector } from "react-redux";
+import { useInterceptors } from "./app/hooks";
+import { TabNavigation } from "./app/molecules/TabNavigation";
+import { Sidenav } from "./app/molecules/Sidenav";
+import { Modal } from "./features/Interactions";
+import { SavePlaylists } from "./features/Playlists";
+import { fetchPlaylists } from "./features/Playlists/playlistsSlice";
+import { selectModalInteraction } from "./features/Interactions/interactionsSlice";
+import { fetchVideos } from "./features/Videos/videoSlice";
+import { Router } from "./app/molecules/Router";
 
 export default function App() {
   const [theme, setTheme] = useState("dark");
-  const { modal } = useInteractions();
+  useInterceptors(axios);
+  const modal = useSelector(selectModalInteraction);
+  const dispatch = useDispatch();
 
-  const toggleTheme = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark");
-  };
+  useEffect(() => {
+    dispatch(fetchVideos());
+    dispatch(fetchPlaylists());
+  }, []);
 
   useLayoutEffect(() => {
     document.body.dataset.theme = theme;
   }, [theme]);
+  const toggleTheme = () => {
+    theme === "dark" ? setTheme("light") : setTheme("dark");
+  };
 
   console.log(useSelector((store) => store));
   return (
     <>
       <section className="">
         <Sidenav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/watch/:videoId" element={<Watch />} />
-        </Routes>
+        <Router />
         <TabNavigation />
       </section>
       {modal && (
         <Modal>
-          <Playlists />
+          <SavePlaylists />
         </Modal>
       )}
     </>

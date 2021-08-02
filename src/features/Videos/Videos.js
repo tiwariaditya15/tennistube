@@ -1,17 +1,11 @@
-import { useEffect } from "react";
 import Video from "./Video";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchVideos, selectAllVideos } from "./videoSlice";
-import styles from "./Video.module.css";
+import { useSelector } from "react-redux";
+import { selectAllVideos } from "./videoSlice";
+import styles from "./video.module.css";
 
 export function Videos() {
-  const dispatch = useDispatch();
   const videos = useSelector(selectAllVideos);
   const error = useSelector((state) => state.videos.error);
-  useEffect(() => {
-    dispatch(fetchVideos());
-  }, []);
-  console.log({ videos });
   return (
     <>
       {videos.map((video) => (
@@ -19,7 +13,7 @@ export function Videos() {
       ))}
       {error && (
         <p className={styles.network__error}>
-          <span>You're offline!</span>
+          <span>Couldn't connect to Server!</span>
         </p>
       )}
     </>

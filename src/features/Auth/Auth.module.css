@@ -1,0 +1,59 @@
+.button {
+  background-color: var(--colors-login);
+  font-size: 0.8rem;
+  font-weight: 100;
+  width: 65%;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.formInput {
+  width: 65%;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border-radius: 0.2rem;
+  padding: 0.8rem;
+  background-color: var(--colors-background-light);
+  border-color: var(--colors-background-light);
+  color: var(--colors-primary);
+}
+
+.formInput:focus {
+  border-color: var(--colors-primary);
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.wrapper_password {
+  position: absolute;
+  right: 22%;
+  top: 25%;
+  transform: translateY(-50%);
+  transform: translateX(50%);
+  cursor: pointer;
+}
+
+.error {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 100;
+}

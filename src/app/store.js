@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import videoSlice from "../features/Videos/videoSlice";
-import playlistsSlice from "../features/Playlists/playlistsSlice";
+import videoReducer from "../features/Videos/videoSlice";
+import playlistsReducer from "../features/Playlists/playlistsSlice";
+import authReducer from "../features/Auth/authSlice";
+import interactionsReducer from "../features/Interactions/interactionsSlice";
+
 export default configureStore({
   reducer: {
-    videos: videoSlice,
-    playlists: playlistsSlice,
+    videos: videoReducer,
+    playlists: playlistsReducer,
+    auth: authReducer,
+    interactions: interactionsReducer,
   },
 });

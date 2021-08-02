@@ -1,7 +1,79 @@
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .spacebetween {
   justify-content: space-between;
+}
+
+/* Library.js */
+.root {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+}
+.thumbnail {
+  max-width: 80%;
+  height: 80%;
+  cursor: pointer;
+}
+
+.relative {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 0.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.absolute {
+  position: absolute;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 30%;
+  height: 80.2%;
+
+  top: 0%;
+  transform: translateX(-57%);
+}
+
+.textOver {
+  display: flex;
+  position: absolute;
+
+  top: 50%;
+  padding: 0.4rem;
+
+  transform: translate(-170%, -100%);
+  cursor: pointer;
+}
+
+.playlists__footer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* History.js */
+.history__root {
+  max-width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CreatePlaylist.js */
+.btn {
+  padding: 0.4rem 0.3rem;
+  margin: 0.5rem;
+  border: none;
+  color: var(--colors-primary);
+  background-color: var(--colors-background-light);
+
+  cursor: pointer;
+}
+
+.formInput {
+  padding: 0.3rem;
 }

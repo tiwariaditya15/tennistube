@@ -1,21 +1,28 @@
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { FeElipsisV } from "../../molecules/icones";
-import { useInteractions } from "../../context/InteractionsProvider";
-import styles from "./Video.module.css";
+import { FeElipsisV } from "../../app/molecules/icones";
+import { setModal, setVideoId } from "../Interactions/interactionsSlice";
+import { addToHistory } from "../Playlists/playlistsSlice";
+import styles from "./video.module.css";
 
 export default function Video({ video }) {
-  const { setModal } = useInteractions();
+  const dispatch = useDispatch();
   return (
     <>
       <section className="card">
         <section className="card-header">
           <NavLink to={`/watch/${video._id}`}>
-            <img src={video.thumbnail} alt="Thumbnail" className="card-img" />
+            <img
+              src={video.thumbnail}
+              alt="Thumbnail"
+              className="card-img"
+              onClick={(event) => dispatch(addToHistory(video._id))}
+            />
           </NavLink>
         </section>
         <section className="card-body">
           <section className="card-body__logo">
-            <img src={video.channel.logo} alt="Logo" srcset="" />
+            <img src={video.channel.logo} alt="Logo" />
           </section>
           <section className="card-body__title">
             <NavLink
@@ -28,7 +35,10 @@ export default function Video({ video }) {
           </section>
           <span
             className={styles.cardbody__menu}
-            onClick={() => setModal(true)}
+            onClick={() => {
+              dispatch(setVideoId(video._id));
+              dispatch(setModal());
+            }}
           >
             <FeElipsisV width="1.5rem" height="1.5rem" />
           </span>

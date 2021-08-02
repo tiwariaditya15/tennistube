@@ -27,3 +27,31 @@
   border: 1px solid var(--colors-secondary);
   padding: 0.5rem;
 }
+
+/* VideoTile */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cardTitle {
+  font-size: 0.8rem;
+  padding: unset;
+}
+
+.cardText {
+  font-size: 0.7rem;
+  padding: unset;
+}
+
+.card__more {
+  cursor: pointer;
+}
+
+.card__more:hover {
+  color: white;
+}
+
+.card__date {
+  color: var(--colors-secondary);
+}

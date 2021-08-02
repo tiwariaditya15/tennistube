@@ -5,11 +5,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --colors-login: #0095f6;
+}
 
 body[data-theme="light"] {
   --colors-primary: #181818;
   --colors-secondary: #aaaaaa;
+  --colors-background-dark: white;
   --colors-background: white;
+  --colors-background-light: white;
 }
 body[data-theme="dark"] {
   --colors-primary: #ffffff;

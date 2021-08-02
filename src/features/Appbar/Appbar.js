@@ -3,8 +3,8 @@ import {
   IcBaselineSearch,
   MdiAccountCircle,
   IonNavicon,
-} from "../../molecules/icones";
-import styles from "./Appbar.module.css";
+} from "../../app/molecules/icones";
+import styles from "./appbar.module.css";
 export function Appbar() {
   return (
     <section className={styles.navbar}>
@@ -16,9 +16,11 @@ export function Appbar() {
           <span className={styles.navbar__navlink}>TennisTube</span>
         </NavLink>
       </section>
+
       <section className={styles.navbar__searchbox}>
         <input type="text" />
       </section>
+
       <section>
         <span className={styles.navbar__navlink}>
           <IcBaselineSearch />
