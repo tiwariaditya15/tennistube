@@ -1,43 +1,35 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useState, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useInterceptors } from "./app/hooks";
+import {
+  useInterceptors,
+  useTheme,
+  useVideos,
+  usePlaylists,
+  useModal,
+  useAuthToken,
+} from "./app/hooks";
+import { Appbar } from "./features/Appbar/";
 import { TabNavigation } from "./app/molecules/TabNavigation";
 import { Sidenav } from "./app/molecules/Sidenav";
 import { Modal } from "./features/Interactions";
 import { SavePlaylists } from "./features/Playlists";
-import { fetchPlaylists } from "./features/Playlists/playlistsSlice";
-import { selectModalInteraction } from "./features/Interactions/interactionsSlice";
-import { fetchVideos } from "./features/Videos/videoSlice";
 import { Router } from "./app/molecules/Router";
 
 export default function App() {
-  const [theme, setTheme] = useState("dark");
+  const { modal } = useModal();
+  const { toggleTheme } = useTheme();
+  const { AUTH_TOKEN } = useAuthToken();
   useInterceptors(axios);
-  const modal = useSelector(selectModalInteraction);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchVideos());
-    dispatch(fetchPlaylists());
-  }, []);
-
-  useLayoutEffect(() => {
-    document.body.dataset.theme = theme;
-  }, [theme]);
-  const toggleTheme = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark");
-  };
-
-  console.log(useSelector((store) => store));
+  useVideos(AUTH_TOKEN);
+  usePlaylists(AUTH_TOKEN);
   return (
     <>
       <section className="">
+        <Appbar toggleTheme={toggleTheme} />
         <Sidenav />
         <Router />
         <TabNavigation />
       </section>
+
       {modal && (
         <Modal>
           <SavePlaylists />

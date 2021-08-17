@@ -51,6 +51,19 @@ export const createPlaylist = createAsyncThunk(
     }
   }
 );
+
+export const removePlaylist = createAsyncThunk(
+  "playlists/removePlaylists",
+  async (playlist) => {
+    try {
+      const response = await api.removePlaylist(playlist);
+      return response.data.playlist;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const playlistsSlice = createSlice({
   name: "playlists",
   initialState: {
@@ -59,45 +72,64 @@ const playlistsSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
-      state.library = action.payload;
-      state.error = null;
-    });
-    builder.addCase(fetchPlaylists.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(addToHistory.fulfilled, (state, action) => {
-      !state.library.history.some((video) => video === action.payload)
-        ? state.library.history.push(action.payload)
-        : (state.library.history = state.library.history
-            .filter((video) => video !== action.payload)
-            .concat(action.payload));
-    });
-    builder.addCase(addToHistory.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(togglePlaylists.fulfilled, (state, { payload }) => {
-      state.library[payload.playlist].some((video) => video === payload.videoId)
-        ? (state.library[payload.playlist] = state.library[
-            payload.playlist
-          ].filter((video) => video !== payload.videoId))
-        : (state.library[payload.playlist] = state.library[
-            payload.playlist
-          ].concat(payload.videoId));
-      state.error = null;
-    });
-    builder.addCase(togglePlaylists.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-    builder.addCase(createPlaylist.fulfilled, (state, action) => {
-      state.library = { ...state.library, [action.payload]: [] };
-      state.error = null;
-    });
-    builder.addCase(createPlaylist.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
+    builder
+      .addCase(fetchPlaylists.fulfilled, (state, action) => {
+        state.library = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchPlaylists.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(addToHistory.fulfilled, (state, action) => {
+        !state.library.history.some((video) => video === action.payload)
+          ? state.library.history.push(action.payload)
+          : (state.library.history = state.library.history
+              .filter((video) => video !== action.payload)
+              .concat(action.payload));
+      })
+      .addCase(addToHistory.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(togglePlaylists.fulfilled, (state, { payload }) => {
+        state.library[payload.playlist].some(
+          (video) => video === payload.videoId
+        )
+          ? (state.library[payload.playlist] = state.library[
+              payload.playlist
+            ].filter((video) => video !== payload.videoId))
+          : (state.library[payload.playlist] = state.library[
+              payload.playlist
+            ].concat(payload.videoId));
+        state.error = null;
+      })
+      .addCase(togglePlaylists.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(createPlaylist.fulfilled, (state, action) => {
+        state.library = { ...state.library, [action.payload]: [] };
+        state.error = null;
+      })
+      .addCase(createPlaylist.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(removePlaylist.fulfilled, (state, action) => {
+        state.error = null;
+        delete state.library[action.payload];
+      })
+      .addCase(removePlaylist.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
   },
 });
+
 export const selectLibrary = (state) => state.playlists.library;
 export const selectHistory = (state) => state.playlists.library.history;
 export const selectPlaylistsFetchError = (state) => state.playlists.error;

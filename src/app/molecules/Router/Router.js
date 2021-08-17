@@ -1,6 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { History, Library } from "../../../features/Playlists";
-import { Login, PrivateRoute } from "../../../features/Auth";
+import {
+  History,
+  Library,
+  IndividualPlaylist,
+} from "../../../features/Playlists";
+import { SignUp, Login, PrivateRoute } from "../../../features/Auth";
 import { Home } from "../../pages/Home";
 import { Watch } from "../../pages/Watch";
 export function Router() {
@@ -9,8 +13,13 @@ export function Router() {
       <Route path="/" element={<Home />} />
       <Route path="/watch/:videoId" element={<Watch />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <PrivateRoute path="/history" element={<History />} />
       <PrivateRoute path="/library" element={<Library />} />
+      <PrivateRoute
+        path="/library/:playlist"
+        element={<IndividualPlaylist />}
+      />
     </Routes>
   );
 }

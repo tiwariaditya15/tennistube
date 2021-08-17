@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SavePlaylistsRow from "./SavePlaylistsRow";
 import CreatePlaylist from "./CreatePlaylist";
-import { fetchPlaylists } from "./playlistsSlice";
 import { clearVideoId, setModal } from "../Interactions/interactionsSlice";
 import { selectLibrary } from "./playlistsSlice";
 import { MdiClose } from "../../app/molecules/icones";
@@ -14,10 +12,6 @@ const LIKED = "liked";
 export function SavePlaylists() {
   const dispatch = useDispatch();
   const library = useSelector(selectLibrary);
-
-  useEffect(() => {
-    dispatch(fetchPlaylists());
-  }, [dispatch]);
 
   return (
     <>

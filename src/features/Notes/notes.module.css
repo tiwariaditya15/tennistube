@@ -1,0 +1,37 @@
+/* Notes.js */
+.notes {
+  border: 1px solid var(--colors-background-light);
+  margin: 0.5rem;
+}
+
+.notesBox {
+  background-color: var(--colors-background);
+  height: 15rem;
+  overflow-y: scroll;
+}
+
+.flex {
+  display: flex;
+}
+
+.send {
+  color: var(--colors-primary);
+  background-color: inherit;
+
+  border: none;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Note.js */
+.noteRow {
+  margin: 0.8rem 0.2rem;
+}
+
+.inputBox {
+  width: 100%;
+  padding: 0.4rem;
+  background-color: var(--colors-background-dark);
+  color: var(--colors-primary);
+  border: 1px solid var(--colors-secondary);
+}

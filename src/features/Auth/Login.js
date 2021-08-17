@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Appbar } from "../../features/Appbar";
 import { login, selectAuthError } from "./authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BxBxShow, BxBxHide } from "../../app/molecules/icones";
@@ -22,17 +21,17 @@ export function Login() {
     if (validateCredentils(credentials)) {
       setError(null);
       dispatch(login(credentials));
-      if (location.state) {
-        navigate(location.state?.from);
+      if (!authError) {
+        // TODO: doing location.state.from
+        navigate("/");
       }
     } else {
-      setError("Fix email or password.");
+      setError("Your email or password doesn't seem correct.");
     }
   };
 
   return (
     <>
-      <Appbar />
       <section className={styles.login + " " + styles.flexColumn}>
         <input
           type="email"
@@ -46,7 +45,7 @@ export function Login() {
         />
         <section className={styles.wrapper}>
           <input
-            type={showPassword ? "text" : "Password"}
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
             className={"form-input outlined " + styles.formInput}
             value={credentials.password}
@@ -70,16 +69,22 @@ export function Login() {
         >
           <span>Login</span>
         </section>
-        <section>
+        <section className={styles.redirect}>
           <span>Don't have an account? </span>
-          <NavLink to="/signup" state={{ from: location.state?.from }}>
+          <NavLink
+            to="/signup"
+            state={{ from: location.state?.from }}
+            className={styles.redirect__btn}
+          >
             Sign Up
           </NavLink>
         </section>
         <section className={styles.error}>
           {authError && !error && authError}
         </section>
-        <section className={styles.error}>{error && error}</section>
+        <section className={styles.error}>
+          <span>{error && error}</span>
+        </section>
       </section>
     </>
   );

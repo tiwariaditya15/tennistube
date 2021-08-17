@@ -1,8 +1,14 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/Auth/authSlice";
 
 export function useInterceptors(axios) {
+  const dispatch = useDispatch();
   const onRequest = (config) => {
-    config.headers.Authorization = localStorage.getItem("AUTH_TOKEN") || null;
+    const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
+    if (AUTH_TOKEN) {
+      config.headers.Authorization = AUTH_TOKEN;
+    }
     return config;
   };
 
@@ -18,6 +24,7 @@ export function useInterceptors(axios) {
     const UNAUTHORIZED = 401;
     if (error.response.status === UNAUTHORIZED) {
       localStorage.removeItem("AUTH_TOKEN");
+      dispatch(logout());
     }
     return Promise.reject(error);
   };

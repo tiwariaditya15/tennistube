@@ -1,18 +1,8 @@
-import localforage from "localforage";
-import { useState } from "react";
-export function useAuthToken(dispatch, setToken) {
-  const [success, setSuccess] = useState(false);
-  localforage
-    .getItem("AUTH_TOKEN")
-    .then((token) => {
-      if (token) {
-        console.log("useAuthToken");
-        setSuccess(true);
-        // dispatch(setToken`({ token }));
-      }
-    })
-    .catch((error) => {
-      console.log({ error });
-    });
-  return [success];
+import { useSelector } from "react-redux";
+import { selectAuthToken } from "../../features/Auth/authSlice";
+export function useAuthToken() {
+  const AUTH_TOKEN = useSelector(selectAuthToken);
+  return {
+    AUTH_TOKEN,
+  };
 }

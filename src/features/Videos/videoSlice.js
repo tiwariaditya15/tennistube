@@ -17,6 +17,54 @@ export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   }
 });
 
+export const addLike = createAsyncThunk(
+  "playlists/addLike",
+  async (videoId) => {
+    try {
+      const { data } = await api.addLike(videoId);
+      return data.videoId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const removeLike = createAsyncThunk(
+  "playlists/removeLike",
+  async (videoId) => {
+    try {
+      const { data } = await api.removeLike(videoId);
+      return data.videoId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const addDislike = createAsyncThunk(
+  "playlists/addDislike",
+  async (videoId) => {
+    try {
+      const { data } = await api.addDislike(videoId);
+      return data.videoId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const removeDislike = createAsyncThunk(
+  "playlists/removeDislike",
+  async (videoId) => {
+    try {
+      const { data } = await api.removeDislike(videoId);
+      return data.videoId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const videosAdapter = createEntityAdapter({
   selectId: (video) => video._id,
 });
@@ -30,9 +78,14 @@ const videoSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchVideos.fulfilled, videosAdapter.upsertMany);
     builder.addCase(fetchVideos.rejected, (state, action) => {
-      // console.log(">>", action.error.message);
       state.error = action.error.message;
     });
+
+    builder.addCase(addLike.fulfilled, (state, action) => {});
+    builder.addCase(addLike.rejected, (state, action) => {});
+
+    builder.addCase(removeLike.fulfilled, (state, action) => {});
+    builder.addCase(removeLike.rejected, (state, action) => {});
   },
 });
 

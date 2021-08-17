@@ -13,13 +13,18 @@
 }
 .navbar__navlink {
   text-decoration: none;
-  color: white;
   cursor: pointer;
   margin-left: 0.4rem;
+  color: var(--colors-primary);
 }
 
 .navbar__searchbox input {
   display: none;
+}
+
+.navbarFlex {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (min-width: 650px) {

@@ -7,6 +7,11 @@
 }
 :root {
   --colors-login: #0095f6;
+  --colors-remove: #ef4444;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body[data-theme="light"] {

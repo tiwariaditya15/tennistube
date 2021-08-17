@@ -1,26 +1,29 @@
+import { NavLink } from "react-router-dom";
 import { MdiPlaylistPlay } from "../../app/molecules/icones";
 import styles from "./playlists.module.css";
 
 export default function PlaylistsTile({ video, library, playlist }) {
   return (
-    <section className={styles.root}>
-      <section className={styles.relative}>
+    <NavLink to={`/library/${playlist}`} className={styles.removeLinkStyle}>
+      <section className={styles.root}>
         <img
-          className={styles.thumbnail}
           src={video.thumbnail}
-          alt="playlist"
+          alt={playlist}
           srcSet=""
+          className={styles.thumbnail}
         />
-        <section className={styles.absolute}></section>
-        <section className={styles.textOver}>
-          <span>
-            <span>{library[playlist].length}</span>
-            <span>
-              <MdiPlaylistPlay width="1em" height="1em" />
-            </span>
+
+        <section className={styles.playlistInfo}>
+          <span>{playlist}</span>
+          <span
+            style={{
+              color: "var(--colors-secondary)",
+            }}
+          >
+            {library[playlist].length} videos
           </span>
         </section>
       </section>
-    </section>
+    </NavLink>
   );
 }

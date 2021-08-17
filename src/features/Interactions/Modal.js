@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setModal, selectModalInteraction } from "./interactionsSlice";
+import {
+  setModal,
+  selectModalInteraction,
+  clearVideoId,
+} from "./interactionsSlice";
 import styles from "./modal.module.css";
 
 export function Modal({ children }) {
@@ -8,7 +12,10 @@ export function Modal({ children }) {
   return (
     <section
       className={modal ? styles.modal + " " + styles.show : styles.modal}
-      onClick={() => dispatch(setModal())}
+      onClick={() => {
+        dispatch(setModal());
+        dispatch(clearVideoId());
+      }}
     >
       <section onClick={(e) => e.stopPropagation()} className={styles.body}>
         {children}

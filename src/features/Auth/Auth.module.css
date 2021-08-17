@@ -52,8 +52,19 @@
 }
 
 .error {
-  width: 65%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-weight: 100;
+  color: red;
+}
+
+.redirect {
   margin-left: auto;
   margin-right: auto;
-  font-weight: 100;
+}
+
+.redirect__btn {
+  text-decoration: none;
+  color: var(--colors-login);
 }

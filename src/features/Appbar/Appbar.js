@@ -3,9 +3,12 @@ import {
   IcBaselineSearch,
   MdiAccountCircle,
   IonNavicon,
+  IcOutlineLightMode,
+  LsDark,
 } from "../../app/molecules/icones";
 import styles from "./appbar.module.css";
-export function Appbar() {
+const DARK = "DARK";
+export function Appbar({ toggleTheme }) {
   return (
     <section className={styles.navbar}>
       <section className="flex">
@@ -21,7 +24,14 @@ export function Appbar() {
         <input type="text" />
       </section>
 
-      <section>
+      <section className={styles.navbarFlex}>
+        <span className={styles.navbar__navlink} onClick={toggleTheme}>
+          {document.body.dataset.theme === DARK ? (
+            <IcOutlineLightMode />
+          ) : (
+            <LsDark />
+          )}
+        </span>
         <span className={styles.navbar__navlink}>
           <IcBaselineSearch />
         </span>
