@@ -11,7 +11,6 @@ export function IndividualPlaylist() {
   const videos = playlistVideos.filter((video) =>
     playlistVideoIds.includes(video._id)
   );
-  console.log({ playlistVideos });
   return (
     <>
       <Suggestions videos={videos} />

@@ -1,0 +1,9 @@
+- home page
+- Videos/Video
+- Library Page
+- Add to history
+- Save Playlists
+- Add/Remove Playlist
+- Add/Remove Like
+- Add/Remove Dislike
+- Add/Remove Count

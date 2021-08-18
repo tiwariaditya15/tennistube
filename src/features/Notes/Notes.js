@@ -1,29 +1,24 @@
-import { useToggle, useNotes } from "../../app/hooks";
+import { useToggle, useNotes, useAddNote } from "../../app/hooks";
 import Note from "./Note";
 import { MdiSend } from "../../app/molecules/icones";
 import styles from "./notes.module.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addNote } from "../Notes/notesSlice";
 
 export function Notes({ videoId }) {
   const { toggle, toggler } = useToggle();
-  const [text, setText] = useState("");
+  const { text, handleChange, handleSend } = useAddNote(videoId);
   const { notes } = useNotes(videoId);
-  const dispatch = useDispatch();
-
-  const handleChange = (e) => setText(e.target.value);
-  const handleSend = (e) => {
-    if (text.length) {
-      dispatch(addNote({ videoId, note: text }));
-      setText("");
-    }
-  };
   return (
     <section className={styles.notes}>
       <section className={styles.notesBox}>
-        {notes &&
-          notes["note"].map((text, idx) => <Note text={text} key={idx} />)}
+        {notes.some(({ video }) => video === videoId) ? (
+          notes
+            .reduce((acc, curNote) => {
+              return curNote["video"] === videoId ? curNote["note"] : [...acc];
+            }, [])
+            .map((text, idx) => <Note text={text} key={idx} />)
+        ) : (
+          <Note text={"You didn't add notes yet."} />
+        )}
       </section>
       <section className={styles.flex}>
         <input

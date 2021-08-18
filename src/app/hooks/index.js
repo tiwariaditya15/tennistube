@@ -7,3 +7,4 @@ export { useAuthToken } from "./useAuthToken";
 export { useScrollToTop } from "./useScrollToTop";
 export { useToggle } from "./useToggle";
 export { useNotes } from "./useNotes";
+export { useAddNote } from "./useAddNote";
