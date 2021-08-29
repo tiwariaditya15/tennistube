@@ -17,10 +17,9 @@ import { Router } from "./app/molecules/Router";
 export default function App() {
   const { modal } = useModal();
   const { toggleTheme } = useTheme();
-  const { AUTH_TOKEN } = useAuthToken();
   useInterceptors(axios);
-  useVideos(AUTH_TOKEN);
-  usePlaylists(AUTH_TOKEN);
+  useVideos();
+  usePlaylists();
   return (
     <>
       <section className="">

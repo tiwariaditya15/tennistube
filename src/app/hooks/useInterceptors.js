@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthToken } from "../../features/Auth/authSlice";
 import { logout } from "../../features/Auth/authSlice";
 
 export function useInterceptors(axios) {
   const dispatch = useDispatch();
+  const AUTH_TOKEN = useSelector(selectAuthToken);
   const onRequest = (config) => {
-    const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
     if (AUTH_TOKEN) {
       config.headers.Authorization = AUTH_TOKEN;
     }
@@ -32,7 +33,7 @@ export function useInterceptors(axios) {
   useEffect(() => {
     axios.interceptors.request.use(onRequest, onRequestError);
     axios.interceptors.response.use(onResponse, onResponseError);
-  }, []);
+  }, [AUTH_TOKEN]);
 
   // const setupInterceptors = (axios) => {
   //    axios.interceptors.request.use(onRequest, onRequestError);

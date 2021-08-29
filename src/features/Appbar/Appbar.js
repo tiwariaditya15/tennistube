@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLoggedIn } from "../Auth/authSlice";
 import {
   IcBaselineSearch,
   MdiAccountCircle,
@@ -7,8 +9,10 @@ import {
   LsDark,
 } from "../../app/molecules/icones";
 import styles from "./appbar.module.css";
+
 const DARK = "DARK";
 export function Appbar({ toggleTheme }) {
+  const logged_in = useSelector(selectLoggedIn);
   return (
     <section className={styles.navbar}>
       <section className="flex">
@@ -35,9 +39,11 @@ export function Appbar({ toggleTheme }) {
         <span className={styles.navbar__navlink}>
           <IcBaselineSearch />
         </span>
-        <span className={styles.navbar__navlink}>
-          <MdiAccountCircle />
-        </span>
+        {logged_in && (
+          <span className={styles.navbar__navlink}>
+            <MdiAccountCircle />
+          </span>
+        )}
       </section>
     </section>
   );

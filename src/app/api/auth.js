@@ -6,5 +6,5 @@ const URL = `${baseURL}/accounts`;
 export const login = ({ email, password }) =>
   axios.post(`${URL}/login`, { email, password });
 
-export const signup = (userDetails) =>
+export const signUp = (userDetails) =>
   axios.post(`${URL}/signup`, { ...userDetails });

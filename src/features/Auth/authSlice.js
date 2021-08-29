@@ -11,6 +11,19 @@ export const login = createAsyncThunk("accounts/login", async (credentials) => {
   }
 });
 
+export const signup = createAsyncThunk(
+  "accounts/signup",
+  async (userDetails) => {
+    try {
+      const response = await api.signUp(userDetails);
+      localStorage.setItem("AUTH_TOKEN", response.data.token);
+      return response.data;
+    } catch (error) {
+      throw error.response.data.error;
+    }
+  }
+);
+
 const initialState = {
   fullname: null,
   logged_in: localStorage.getItem("AUTH_TOKEN") ? true : false,
@@ -35,15 +48,31 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.fullname = action.payload.fullname;
-      state.logged_in = true;
-      state.AUTH_TOKEN = action.payload.token;
-      state.error = null;
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
+    builder
+      .addCase(login.fulfilled, (state, action) => {
+        state.fullname = action.payload.fullname;
+        state.logged_in = true;
+        state.AUTH_TOKEN = action.payload.token;
+        state.error = null;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(signup.fulfilled, (state, action) => {
+        console.log("signup.fullfilled", { action });
+        state.logged_in = true;
+        state.AUTH_TOKEN = action.payload.token;
+        state.fullname = action.payload.fullname;
+        state.error = null;
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.AUTH_TOKEN = null;
+        state.fullname = null;
+        state.logged_in = false;
+      });
   },
 });
 
