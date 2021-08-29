@@ -8,7 +8,7 @@ import {
   IcOutlineLightMode,
   LsDark,
 } from "../../app/molecules/icones";
-import styles from "./appbar.module.css";
+import styles from "./Appbar.module.css";
 
 const DARK = "DARK";
 export function Appbar({ toggleTheme }) {
