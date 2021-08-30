@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FeElipsisV } from "../../app/molecules/icones";
 import { setModal, setVideoId } from "../Interactions/interactionsSlice";
-import styles from "./video.module.css";
+import styles from "./Video.module.css";
 
 export function VideoTile({ video }) {
   const dispatch = useDispatch();
