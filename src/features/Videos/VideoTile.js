@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { FeElipsisV } from "../../app/molecules/icones";
 import { setModal, setVideoId } from "../Interactions/interactionsSlice";
 import styles from "./Video.module.css";
-// Adding this to fix the wrong file name
+
 export function VideoTile({ video }) {
   const dispatch = useDispatch();
   return (
