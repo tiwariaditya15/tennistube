@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FeElipsisV } from "../../app/molecules/icones";
 import { setModal, setVideoId } from "../Interactions/interactionsSlice";
 import { addToHistory } from "../Playlists/playlistsSlice";
-import styles from "./video.module.css";
+import styles from "./Video.module.css";
 
 export default function Video({ video }) {
   const dispatch = useDispatch();

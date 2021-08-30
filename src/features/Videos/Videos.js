@@ -1,7 +1,7 @@
 import Video from "./Video";
 import { useSelector } from "react-redux";
 import { selectAllVideos } from "./videoSlice";
-import styles from "./video.module.css";
+import styles from "./Video.module.css";
 
 export function Videos() {
   const videos = useSelector(selectAllVideos);
