@@ -8,6 +8,7 @@ export function useInterceptors(axios) {
   const AUTH_TOKEN = useSelector(selectAuthToken);
   const onRequest = (config) => {
     if (AUTH_TOKEN) {
+      console.log("setting token", AUTH_TOKEN);
       config.headers.Authorization = AUTH_TOKEN;
     }
     return config;
@@ -24,6 +25,7 @@ export function useInterceptors(axios) {
   const onResponseError = (error) => {
     const UNAUTHORIZED = 401;
     if (error.response.status === UNAUTHORIZED) {
+      console.log("removing token");
       localStorage.removeItem("AUTH_TOKEN");
       dispatch(logout());
     }

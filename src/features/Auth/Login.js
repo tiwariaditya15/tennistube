@@ -37,6 +37,7 @@ export function Login() {
           type="email"
           placeholder="Email"
           className={"form-input outlined " + styles.formInput}
+          value={credentials.email}
           onChange={(e) =>
             setCredentials((prevCredentials) => {
               return { ...prevCredentials, email: e.target.value };
@@ -68,6 +69,19 @@ export function Login() {
           onClick={() => handleLogin()}
         >
           <span>Login</span>
+        </section>
+        <section
+          className={"btn " + styles.button}
+          style={{ marginTop: "0" }}
+          onClick={() =>
+            setCredentials((prevCredentials) => ({
+              ...prevCredentials,
+              email: "tiwariadi@gmail.com",
+              password: "123456",
+            }))
+          }
+        >
+          <span>Fill Credentils</span>
         </section>
         <section className={styles.redirect}>
           <span>Don't have an account? </span>
