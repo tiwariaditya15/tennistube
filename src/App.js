@@ -22,13 +22,12 @@ export default function App() {
   usePlaylists();
   return (
     <>
+      <Sidenav />
       <section className="">
         <Appbar toggleTheme={toggleTheme} />
-        <Sidenav />
         <Router />
-        <TabNavigation />
       </section>
-
+      <TabNavigation />
       {modal && (
         <Modal>
           <SavePlaylists />

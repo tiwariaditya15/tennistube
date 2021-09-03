@@ -27,9 +27,17 @@
   align-items: center;
 }
 
+.sideNav {
+  display: none;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 650px) {
   .navbar__searchbox input {
     color: var(--colors-background);
     outline: none;
+  }
+  .sideNav {
+    display: block;
   }
 }

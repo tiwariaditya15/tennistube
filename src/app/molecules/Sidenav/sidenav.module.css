@@ -1,3 +1,35 @@
 .sidenav {
-  display: none;
+  position: fixed;
+  width: 100%;
+  min-height: 100rem;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Navigate.js */
+.body {
+  width: 25%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  background-color: var(--colors-background);
+}
+
+.sideNavIcon {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.navLinks {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.8rem;
+}
+
+.navLinks:hover {
+  background-color: var(--colors-background-light);
+  cursor: pointer;
 }
