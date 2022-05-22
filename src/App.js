@@ -13,6 +13,7 @@ import { Sidenav } from "./app/molecules/Sidenav";
 import { Modal } from "./features/Interactions";
 import { SavePlaylists } from "./features/Playlists";
 import { Router } from "./app/molecules/Router";
+import styles from "./App.module.css";
 
 export default function App() {
   const { modal } = useModal();
@@ -22,9 +23,9 @@ export default function App() {
   usePlaylists();
   return (
     <>
-      <Sidenav />
-      <section className="">
-        <Appbar toggleTheme={toggleTheme} />
+      <Appbar toggleTheme={toggleTheme} />
+      <section className={styles.grid}>
+        <Sidenav />
         <Router />
       </section>
       <TabNavigation />

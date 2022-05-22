@@ -6,7 +6,6 @@ import styles from "./description.module.css";
 
 export function Description({ video }) {
   const logged_in = useSelector(selectLoggedIn);
-  console.log({ video });
   return (
     <section className={styles.description}>
       <section className={styles.title}>{video.title}</section>

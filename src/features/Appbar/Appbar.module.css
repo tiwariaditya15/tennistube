@@ -1,9 +1,13 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 1.5rem;
   background-color: var(--colors-background);
   color: var(--colors-primary);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 .navbar__main {
   display: flex;

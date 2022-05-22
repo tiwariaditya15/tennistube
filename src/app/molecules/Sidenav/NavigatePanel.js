@@ -1,12 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
-import { IonNavicon } from "../icones";
-import { useDispatch, useSelector } from "react-redux";
-import { setSideNavigation } from "../../../features/Interactions/interactionsSlice";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "./sidenav.module.css";
 import { selectLoggedIn } from "../../../features/Auth/authSlice";
 
 export default function NavigatePanel() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const logged_in = useSelector(selectLoggedIn);
   return (
@@ -15,15 +12,8 @@ export default function NavigatePanel() {
       onClick={(event) => event.stopPropagation()}
     >
       <section
-        className={styles.sideNavIcon}
-        onClick={() => dispatch(setSideNavigation())}
-      >
-        <IonNavicon />
-      </section>
-      <section
         className={styles.navLinks}
         onClick={() => {
-          dispatch(setSideNavigation());
           navigate("/");
         }}
       >
@@ -32,7 +22,6 @@ export default function NavigatePanel() {
       <section
         className={styles.navLinks}
         onClick={() => {
-          dispatch(setSideNavigation());
           navigate("/library");
         }}
       >
@@ -41,7 +30,6 @@ export default function NavigatePanel() {
       <section
         className={styles.navLinks}
         onClick={() => {
-          dispatch(setSideNavigation());
           navigate("/history");
         }}
       >
@@ -52,7 +40,6 @@ export default function NavigatePanel() {
           className={styles.navLinks}
           onClick={() => {
             navigate("/login");
-            dispatch(setSideNavigation());
           }}
         >
           Login

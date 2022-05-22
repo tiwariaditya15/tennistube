@@ -4,7 +4,7 @@ const interactionsSlice = createSlice({
   name: "interactions",
   initialState: {
     modal: false,
-    sideNavigation: false,
+    sideNavigation: true,
     videoId: null,
   },
   reducers: {
