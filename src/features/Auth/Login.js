@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { login, selectAuthError } from "./authSlice";
+import { useLocation, Navigate } from "react-router";
+import {
+  login,
+  selectAuthError,
+  selectLoadingState,
+  selectLoggedIn,
+} from "./authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BxBxShow, BxBxHide } from "../../app/molecules/icones";
 import { validateCredentils } from "./utilityFunctions";
@@ -12,24 +17,25 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const authError = useSelector(selectAuthError);
+  const loading = useSelector(selectLoadingState);
+  const logged_in = useSelector(selectLoggedIn);
 
   const handleLogin = () => {
     if (validateCredentils(credentials)) {
       setError(null);
       dispatch(login(credentials));
-      if (!authError) {
-        // TODO: doing location.state.from
-        navigate("/");
-      }
     } else {
       setError("Your email or password doesn't seem correct.");
     }
   };
 
+  if (logged_in) {
+    return <Navigate to="/" replace={true} />;
+  }
   return (
     <>
       <section className={styles.login + " " + styles.flexColumn}>
@@ -66,9 +72,13 @@ export function Login() {
         </section>
         <section
           className={"btn " + styles.button}
-          onClick={() => handleLogin()}
+          onClick={() => {
+            if (!loading) {
+              handleLogin();
+            }
+          }}
         >
-          <span>Login</span>
+          <span>{loading ? "Loging in..." : "Login"}</span>
         </section>
         <section
           className={"btn " + styles.button}

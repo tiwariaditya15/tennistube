@@ -1,16 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectLoggedIn } from "../Auth/authSlice";
+import { logout, selectLoggedIn } from "../Auth/authSlice";
+import { useDispatch } from "react-redux";
 import {
-  MdiAccountCircle,
   IcOutlineLightMode,
   LsDark,
+  MdiLogout,
 } from "../../app/molecules/icones";
 import styles from "./Appbar.module.css";
 
 const DARK = "DARK";
 export function Appbar({ toggleTheme }) {
   const logged_in = useSelector(selectLoggedIn);
+  const dispatch = useDispatch();
   return (
     <section className={styles.navbar}>
       <section className="flex">
@@ -34,8 +36,12 @@ export function Appbar({ toggleTheme }) {
           )}
         </span>
         {logged_in && (
-          <span className={styles.navbar__navlink}>
-            <MdiAccountCircle />
+          <span
+            className={styles.navbar__navlink}
+            style={{ position: "relative" }}
+            onClick={() => dispatch(logout())}
+          >
+            <MdiLogout />
           </span>
         )}
       </section>

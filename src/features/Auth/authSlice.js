@@ -29,6 +29,7 @@ const initialState = {
   logged_in: localStorage.getItem("AUTH_TOKEN") ? true : false,
   AUTH_TOKEN: localStorage.getItem("AUTH_TOKEN"),
   error: null,
+  loading: false,
 };
 
 const authSlice = createSlice({
@@ -45,18 +46,24 @@ const authSlice = createSlice({
       state.logged_in = false;
       state.AUTH_TOKEN = null;
       state.error = null;
+      localStorage.removeItem("AUTH_TOKEN");
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(login.fulfilled, (state, action) => {
         state.fullname = action.payload.fullname;
         state.logged_in = true;
         state.AUTH_TOKEN = action.payload.token;
         state.error = null;
+        state.loading = false;
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error.message;
+        state.loading = false;
       });
 
     builder
@@ -80,4 +87,5 @@ export const { setToken, logout } = authSlice.actions;
 export const selectLoggedIn = (state) => state.auth.logged_in;
 export const selectAuthError = (state) => state.auth.error;
 export const selectAuthToken = (state) => state.auth.AUTH_TOKEN;
+export const selectLoadingState = (state) => state.auth.loading;
 export default authSlice.reducer;
