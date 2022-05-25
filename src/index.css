@@ -72,6 +72,17 @@ body {
 .card-body__title {
   cursor: pointer;
 }
+.loader {
+  animation: spinner 2s infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 @media screen and (min-width: 960px) {
   .card {

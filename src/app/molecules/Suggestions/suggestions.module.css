@@ -1,9 +1,12 @@
 .root {
   margin: 0.5rem;
+  margin-top: 6rem;
+  width: auto;
 }
 
 @media screen and (min-width: 650px) {
   .root {
     padding: 1rem;
+    width: 450px;
   }
 }

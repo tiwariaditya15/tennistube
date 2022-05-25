@@ -8,6 +8,7 @@ import styles from "./playlists.module.css";
 
 const HISTORY = "history";
 const LIKED = "liked";
+const DISLIKED = "disliked";
 
 export function SavePlaylists() {
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ export function SavePlaylists() {
         </span>
       </section>
       {Object.keys(library)
-        .filter((playlist) => playlist !== HISTORY && playlist !== LIKED)
+        .filter(
+          (playlist) =>
+            playlist !== HISTORY && playlist !== LIKED && playlist !== DISLIKED
+        )
         .map((playlist) => (
           <SavePlaylistsRow playlist={playlist} />
         ))}

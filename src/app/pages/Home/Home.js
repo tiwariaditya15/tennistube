@@ -13,7 +13,7 @@ export function Home() {
           <Videos />
         ) : (
           <section className={styles.loader}>
-            <EosIconsLoading width="4rem" height="4rem" />
+            <EosIconsLoading className="loader" width="4rem" height="4rem" />
           </section>
         )}
       </section>
