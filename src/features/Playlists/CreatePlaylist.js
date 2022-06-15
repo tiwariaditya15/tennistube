@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { IcBaselineAdd } from "../../app/molecules/icones";
+import { selectVideoById } from "../Videos/videoSlice";
 import styles from "./playlists.module.css";
 import { createPlaylist } from "./playlistsSlice";
 
@@ -9,11 +11,12 @@ export default function CreatePlaylist() {
   const [playlist, setPlaylist] = useState("");
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
+  const videoId = useSelector((state) => state.interactions.videoId);
   const handleCreatePlaylist = (event) => {
     if (playlist.length > 0) {
       setError(false);
       setCreateModal(false);
-      dispatch(createPlaylist(playlist));
+      dispatch(createPlaylist({ playlist, videoId }));
     } else {
       setError(true);
     }

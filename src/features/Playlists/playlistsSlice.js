@@ -42,10 +42,11 @@ export const togglePlaylists = createAsyncThunk(
 
 export const createPlaylist = createAsyncThunk(
   "playlists/createPlaylists",
-  async (playlist) => {
+  async ({ playlist, videoId }) => {
     try {
       const response = await api.createPlaylist(playlist);
-      return response.data.playlist;
+      await api.togglePlaylists(videoId, playlist);
+      return { playlist: response.data.playlist, videoId };
     } catch (error) {
       throw error;
     }
@@ -111,8 +112,18 @@ const playlistsSlice = createSlice({
       });
 
     builder
-      .addCase(createPlaylist.fulfilled, (state, action) => {
-        state.library = { ...state.library, [action.payload]: [] };
+      .addCase(createPlaylist.fulfilled, (state, { payload }) => {
+        state.library = { ...state.library, [payload.playlist]: [] };
+        state.library[payload.playlist].some(
+          (video) => video === payload.videoId
+        )
+          ? (state.library[payload.playlist] = state.library[
+              payload.playlist
+            ].filter((video) => video !== payload.videoId))
+          : (state.library[payload.playlist] = state.library[
+              payload.playlist
+            ].concat(payload.videoId));
+        state.error = null;
         state.error = null;
       })
       .addCase(createPlaylist.rejected, (state, action) => {
