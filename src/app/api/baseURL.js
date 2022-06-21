@@ -1,1 +1,1 @@
-export const baseURL = "https://tennistube-be.tiwariaditya.repl.co";
+export const baseURL = process["env"]["REACT_APP_ENDPOINT"];
